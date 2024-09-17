@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                     <label>Password</label>
-                    <input class="form-control" name="password" value="{{old('password')}}" >
+                    <input class="form-control" type="password" name="password" value="{{old('password')}}" >
                     @error('password')
                     <p class="alert alert-danger mt-2">{{$message}}</p>
                     @enderror

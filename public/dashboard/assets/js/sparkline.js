@@ -679,7 +679,7 @@
               ? (K[b][1].call(a),
                 d.data(K[b][0], "_jqs_pending", !1),
                 e.push(b))
-              : !d(a).closest("html").length &&
+              : !d(a).closest("front").length &&
                 !d.data(a, "_jqs_pending") &&
                 (d.data(K[b][0], "_jqs_pending", !1), e.push(b));
         for (b = e.length; b; b--) K.splice(e[b - 1], 1);

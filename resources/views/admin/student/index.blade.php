@@ -57,10 +57,13 @@
                                 <td>{{$student->phone}}</td>
                                 <td>{{ $student ->created_at}}</td>
                                 <td>
-                                    <button class="btn btn-primary">Edit</button>
-                                    <button class="btn btn-danger">
-                                        <a >Delete</a>
-                                    </button>
+                                    {{-- <a href="{{ route('admin.student.show',['id' => $student->id])}}" class="btn btn-outline-primary">Show</a> --}}
+                                    <a href="{{ route('admin.student.edit',['id' => $student->id])}}" class="btn btn-outline-primary">Edit</a>
+                                                            <form class="d-inline" method="post" action="{{ route('admin.student.destroy',$student->id)  }}">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <input type="submit" class="btn btn-danger delete" value = "Delete" >
+                                                            </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -73,5 +76,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const deleteBtn = document.querySelectorAll('.delete');
+        for(let i = 0 ; i < deleteBtn.length;i++){
+            deleteBtn[i].onclick = function (e){
+                let conf = confirm("are you sure :");
+                if(!conf){e.preventDefault();}
+            }
+    
+        }
+    </script>   
 
 @endsection

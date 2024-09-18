@@ -50,3 +50,40 @@
 
       <!-- services section end -->
 
+      {{-- @extends('front.LayOut.app')
+      @section('title', 'Services')
+      
+      @section('item_content')
+          <!-- services section start -->
+          <div class="services_section layout_padding">
+              <div class="container">
+                  <h1 class="services_taital"><span style="color: #fcce2d">Our</span> Courses</h1>
+                  <div class="services_section_2">
+                      <div class="row">
+                        @foreach($courses as $course)
+                        <div class="col-md-6">
+                            
+                                    <div class="seemore_text">
+                                        <!-- Display the course name -->
+                                        {{ $course->name }}
+                                    </div>
+                                    <div class="seemore_text">
+                                        <!-- Display the course price -->
+                                        Price: ${{ $course->price }}
+                                    </div>
+                                    <div class="seemore_text">
+                                        <!-- Display the teacher name using the relationship -->
+                                        Teacher: {{ $course->teachers->username ?? 'N/A' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       @endforeach
+                    
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- services section end -->
+      @endsection --}}
+      

@@ -65,7 +65,7 @@
                                                         <form class="d-inline" method="post" action="{{ route('admin.course.destroy',$course->id)  }}">
                                                             @csrf
                                                             @method('delete')
-                                                            <input type="submit" class="btn btn-danger" value = "Delete" >
+                                                            <input type="submit" class="btn btn-danger delete" value = "Delete" >
                                                         </form>
                             </td>
                     @endforeach
@@ -80,5 +80,14 @@
         </div>
     </div>
 </div>
+<script>
+    const deleteBtn = document.querySelectorAll('.delete');
+    for(let i = 0 ; i < deleteBtn.length;i++){
+        deleteBtn[i].onclick = function (e){
+            let conf = confirm("are you sure :");
+            if(!conf){e.preventDefault();}
+        }
 
+    }
+</script>
 @endsection

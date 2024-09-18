@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Teachers;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherRequest;
 use App\Http\Resources\TeacherResource;
-use App\Models\Teachers;
-use Illuminate\Http\Request;
+use App\Http\Requests\SaveUserInfoFormRequest;
 
 class TeacherController extends Controller
 {
@@ -38,6 +39,13 @@ class TeacherController extends Controller
         $teacher = Teachers::findorfail($id);
         return view('admin.teacher.edit',compact('teacher'));
     }
+    public function update(SaveUserInfoFormRequest $request,$id){
+        $data = $request->validated();
+        $student = Teachers::findorfail($id);
+        $student->update($data);
+        return redirect()->route('admin.teacher.index')->with('msg','teacher Updated Successfully');
+    }
+
     public function destroy($id)
     {
         $teacher = Teachers::findorfail($id);

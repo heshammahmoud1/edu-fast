@@ -12,7 +12,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-techer"><a href="#">Home</a></li>
                             <li class="breadcrumb-techer active" aria-current="page">
-                                <a href="#" class="active">Students</a>
+                                <a href="#" class="active">teacher</a>
                             </li>
                         </ol>
                     </nav>
@@ -53,6 +53,8 @@
                             <td>{{$teacher->username}}</td>
 {{--                            <i class="fa-regular fa-eye"></i>--}}
                             <td><a href="{{ route('admin.teacher.show',['id' => $teacher->id])}}" class="btn btn-primary">Show</a>
+                                <a href="{{ route('admin.teacher.edit',['id' => $teacher->id])}}" class="btn btn-outline-primary">Edit</a>
+
                                                         <form class="d-inline" method="post" action="{{ route('admin.teacher.destroy',$teacher->id)  }}">
                                                             @csrf
                                                             @method('delete')

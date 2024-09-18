@@ -60,5 +60,16 @@ class CourseController extends Controller
         $course->update($data);
         return redirect()->route('admin.course.index')->with('msg','Course Updated Successfully');
     }
+    // public function showcources() {
+    //     // جلب جميع الكورسات من قاعدة البيانات
+    //     $courses = Courses::all();
+        
+    //     // تمرير الكورسات إلى الـ view
+    //     return view('front.services', compact('courses'));
+    // }
+    // public function teacher()
+    // {
+    //     return $this->belongsTo(Teachers::class);
+    // }
 }
 

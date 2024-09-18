@@ -35,7 +35,8 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::get('/teacher/create', 'create')->name('create');
         Route::get('/teacher/{id}', 'show')->where([" id "=>" [0-9]+ "])->name('show');
         Route::post('/teacher/store', 'store')->name('store');
-        Route::get('/teacher/{id}/edit', 'edit')->name('edit');
+        Route::get('/teacher/edit/{id}', 'edit')->where([" id "=>" [0-9]+ "])->name('edit');
+        Route::put('/teacher/{id}', 'update')->name('update');            
         Route::delete('teacher/{id}', 'destroy')->name('destroy');
     });
 
@@ -44,6 +45,10 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::get('/student', 'index')->name('index');
         Route::get('/student/{id}', 'show')->where([" id "=>" [0-9]+ "])->name('show');
         Route::delete('student/{id}', 'destroy')->name('destroy');
+        Route::get('/student/edit/{id}', 'edit')->where([" id "=>" [0-9]+ "])->name('edit');
+        Route::put('/student/{id}', 'update')->name('update');            
+   
+
     });
 
 
@@ -74,3 +79,4 @@ Route::get('/profile', function () {
     return view('auth.profile');
 })->name('profile');
 
+// Route::get('/services', action: [CourseController::class, 'showcources'])->name('services');

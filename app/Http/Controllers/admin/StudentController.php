@@ -14,8 +14,16 @@ class StudentController extends Controller
         $data= StudentResource::collection($students);
         return view('admin.student.index',compact('data'));
     }
-    public function show(){
-        return view('admin.student.show');
+    public function show($id){
+        $student = Student::findorfail($id);
+        return view('admin.student.show',compact('student'));
+    }
+    public function destroy($id)
+    {
+        $student = Student::findorfail($id);
+        $student->delete();
+        return redirect()->back()->with('delete','Student deleted successfully');
+
     }
 }
 

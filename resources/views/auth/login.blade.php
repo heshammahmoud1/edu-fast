@@ -2,11 +2,6 @@
 @section('content')
 <div class="contact_us">
     <div class="container">
-        {{--            @if($errors->any())--}}
-        {{--                @foreach($errors->all() as $error)--}}
-        {{--                    <p class="alert alert-danger">{{$error}}</p>--}}
-        {{--                @endforeach--}}
-        {{--            @endif--}}
         <form method="post" action={{route('auth.login')}}>
             @csrf
             @if(session('message'))

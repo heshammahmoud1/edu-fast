@@ -35,12 +35,15 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::get('/teacher/create', 'create')->name('create');
         Route::get('/teacher/{id}', 'show')->where([" id "=>" [0-9]+ "])->name('show');
         Route::post('/teacher/store', 'store')->name('store');
+        Route::get('/teacher/{id}/edit', 'edit')->name('edit');
+        Route::delete('teacher/{id}', 'destroy')->name('destroy');
     });
 
 
     Route::controller(StudentController::class)->name("student.")->group(function () {
         Route::get('/student', 'index')->name('index');
         Route::get('/student/{id}', 'show')->where([" id "=>" [0-9]+ "])->name('show');
+        Route::delete('student/{id}', 'destroy')->name('destroy');
     });
 
 
@@ -49,6 +52,11 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::get('/course/create', 'create')->name('create');
         Route::post('/course/store', 'store')->name('store');
         Route::get('/course/{id}', 'show')->where([" id "=>" [0-9]+ "])->name('show');
+        Route::delete('course/{id}', 'destroy')->name('destroy');
+        Route::get('/course/edit/{id}', 'edit')->where([" id "=>" [0-9]+ "])->name('edit');
+        //if data is validated do that Route
+        Route::put('/course/{id}', 'update')->name('update');
+
     });
 });
 Route::get('/login',[LoginController::class,'index'])->name('login');
@@ -62,4 +70,7 @@ Route::group(['prefix'=>'/auth'],function(){
 });
 //-----------------end of register----------------
 Route::get('/logout',[LogoutController::class,'logout_system']);
+Route::get('/profile', function () {
+    return view('auth.profile');
+})->name('profile');
 

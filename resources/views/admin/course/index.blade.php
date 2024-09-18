@@ -6,13 +6,13 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Students</h4>
+                <h4 class="page-title">Courses</h4>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                <a href="#" class="active">Students</a>
+                                <a href="#" class="active">Courses</a>
                             </li>
                         </ol>
                     </nav>
@@ -23,6 +23,11 @@
 @endsection
 
 @section("content")
+    @if (session()->has('msg'))
+
+        <p class="alert alert-success">{{session('msg')}}</p>
+
+    @endif
 <div class="card">
 
     <div class="card-body">
@@ -36,8 +41,9 @@
                 <tr>
                     <th>Course_id</th>
                     <th>CourseName</th>
-                    <th>Price</th>
-                    <th>Teacher_name</th>
+{{--                    <th>Price</th>--}}
+{{--                    <th>Teacher_name</th>--}}
+                    <th>Control</th>
 
                 </tr>
                 </thead>
@@ -51,16 +57,17 @@
                         <tr>
                             <td>{{$course->id}}</td>
                             <td>{{$course->name}}</td>
-                            <td>{{$course->price}}</td>
-                            <td>{{$course->teacher->username}}</td>
+{{--                            <td>{{$course->price}}</td>--}}
+{{--                            <td>{{$course->teacher->username}}</td>--}}
 
-                            <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-danger">
-                                    <a >Delete</a>
-                                </button>
+                            <td><a href="{{ route('admin.course.show',['id' => $course->id])}}" class="btn btn-outline-primary">Show</a>
+                                <a href="{{ route('admin.course.edit',['id' => $course->id])}}" class="btn btn-outline-primary">Edit</a>
+                                                        <form class="d-inline" method="post" action="{{ route('admin.course.destroy',$course->id)  }}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <input type="submit" class="btn btn-danger" value = "Delete" >
+                                                        </form>
                             </td>
-                        </tr>
                     @endforeach
                 @endif
                 <tbody>
@@ -69,8 +76,9 @@
                 </tr>
                 </tbody>
             </table>
+            {{ $data->links() }}
         </div>
     </div>
 </div>
-{{ $data->links() }}
+
 @endsection

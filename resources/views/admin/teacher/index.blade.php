@@ -36,10 +36,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <td>Created_at</td>
-                    <td>Control</td>
+                    <td>Action</td>
 
                 </tr>
                 </thead>
@@ -50,21 +47,20 @@
 
                     </tr>
                 @else
-                @foreach($data as $teacher)
-                <tr>
-                    <td>{{$teacher->id}}</td>
-                    <td>{{$teacher->username}}</td>
-                    <td>{{ $teacher->email }}</td>
-                    <td>{{$teacher->phone}}</td>
-                    <td>{{ $teacher ->created_at}}</td>
-                    <td>
-                        <button class="btn btn-primary">Edit</button>
-                        <button class="btn btn-danger">
-                            <a >Delete</a>
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
+                    @foreach($data as $teacher)
+                        <tr>
+                            <td>{{$teacher->id}}</td>
+                            <td>{{$teacher->username}}</td>
+{{--                            <i class="fa-regular fa-eye"></i>--}}
+                            <td><a href="{{ route('admin.teacher.show',['id' => $teacher->id])}}" class="btn btn-primary">Show</a>
+                                                        <form class="d-inline" method="post" action="{{ route('admin.teacher.destroy',$teacher->id)  }}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <input type="submit" class="btn btn-danger delete" value = "Delete" >
+                                                        </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
                 </tbody>
             </table>
@@ -72,4 +68,14 @@
         </div>
     </div>
 </div>
+<script>
+    const deleteBtn = document.querySelectorAll('.delete');
+    for(let i = 0 ; i < deleteBtn.length;i++){
+        deleteBtn[i].onclick = function (e){
+            let conf = confirm("are you sure :");
+            if(!conf){e.preventDefault();}
+        }
+
+    }
+</script>
 @endsection

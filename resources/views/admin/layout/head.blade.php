@@ -27,4 +27,8 @@
     href="{{asset('dashboard/assets')}}/css/dataTables.bootstrap4.css"
     rel="stylesheet"
 />
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
 

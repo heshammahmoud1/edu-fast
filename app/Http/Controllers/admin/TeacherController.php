@@ -29,8 +29,21 @@ class TeacherController extends Controller
 
 
     }
-    public function show(){
-        return view('admin.teacher.show');
+    public function show($id){
+        $teacher = Teachers::findorfail($id);
+        return view('admin.teacher.show',compact('teacher'));
+    }
+
+    public function edit($id){
+        $teacher = Teachers::findorfail($id);
+        return view('admin.teacher.edit',compact('teacher'));
+    }
+    public function destroy($id)
+    {
+        $teacher = Teachers::findorfail($id);
+        $teacher->delete();
+        return redirect()->back()->with('delete','Teacher deleted successfully');
+
     }
 }
 

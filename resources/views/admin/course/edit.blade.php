@@ -30,14 +30,15 @@
             @endforeach
 
         @endif
-        @if (session()->has('msg'))
+{{--        @if (session()->has('msg'))--}}
 
-            <p class="alert alert-success">{{session('msg')}}</p>
+{{--            <p class="alert alert-success">{{session('msg')}}</p>--}}
 
-        @endif
-        <form class="form-horizontal" action="{{route('admin.course.store')}}"
+{{--        @endif--}}
+        <form class="form-horizontal" action="{{route('admin.course.update',$course->id)}}"
               enctype="multipart/form-data" method="post">
             @csrf
+            @method('PUT')
             <div class="card-body">
 
                 <div class="form-group row">
@@ -50,7 +51,7 @@
                             id="crsName"
                             placeholder="First Name Here"
                             name="name"
-                            value="{{old('name')}}"
+                            value="{{$course['name']}}"
                         />
                     </div>
                 </div>
@@ -64,9 +65,10 @@
                         <select name="teacher_id" id="teacher">
                             <option value="">Select a Teacher </option>
                             @foreach ($teachers as $teacher)
-                            <option value="{{$teacher['id']}}">
-                                   {{$teacher['username']}}
-                            </option>
+{{--                                <option value="{{$teacher['id']}}">{{$teacher['username']}}</option>--}}
+                                <option value="{{$teacher->id}}" @if($course->teacher_id == $teacher->id )  selected @endif>
+                                    {{$teacher->username}}</option>
+
                             @endforeach
 
                         </select>
@@ -86,7 +88,7 @@
                             id="price"
                             placeholder="Enter Price Here"
                             name="price"
-                            value="{{old('price')}}"
+                            value="{{$course['price']}}"
                         />
                     </div>
                 </div>
@@ -107,7 +109,7 @@
                     </div>
                 </div>
 
-                </div>
+            </div>
 
             <div class="border-top">
                 <div class="card-body">

@@ -9,6 +9,7 @@ use App\Models\Courses;
 use App\Models\Student;
 use App\Models\Teachers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage; 
 
 class CourseController extends Controller
 {
@@ -22,30 +23,42 @@ class CourseController extends Controller
         return view('admin.course.index', compact('data'));
 
     }
-    public function create(){
-     $teachers = Teachers::all();
+    public function create()
+    {
+        $teachers = Teachers::all();
         return view('admin.course.create', compact('teachers'));
     }
+    
     public function store(CourseRequest $request)
     {
-
-        $data=$request->validated();
-
+        $data = $request->validated();
+    
+        if ($request->file('image')) {
+            $name = $request->file('image')->getClientOriginalName();
+    
+            $stor = $request->file('image')->storeAs('public/makes', $name);
+        
+            $data['image'] = str_replace('public/', '', $stor);
+        
+        }
         Courses::create($data);
-        return redirect()->back()->with('msg', 'Course created successfully');
-
-
+        return redirect()->back()->with('msg', 'Added course');
     }
+    
+    
+    
     public function show($id){
         $course = Courses::findorfail($id);
         return view('admin.course.show',compact('course'));
     }
     public function destroy($id)
     {
-        $course = Courses::findorfail($id);
+        $course = Courses::findOrFail($id);
+        if (!empty($course->image) && Storage::exists('public/' . $course->image)) {
+            Storage::delete('public/' . $course->image);
+        }
         $course->delete();
-        return redirect()->back()->with('delete','Course deleted successfully');
-
+        return redirect()->back()->with('delete', 'Course deleted successfully');
     }
     //edit a course and this func to edit the form
     public function edit($id){

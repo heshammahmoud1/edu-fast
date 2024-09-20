@@ -47,8 +47,7 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::delete('student/{id}', 'destroy')->name('destroy');
         Route::get('/student/edit/{id}', 'edit')->where([" id "=>" [0-9]+ "])->name('edit');
         Route::put('/student/{id}', 'update')->name('update');            
-   
-
+    
     });
 
 

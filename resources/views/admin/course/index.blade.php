@@ -41,9 +41,9 @@
                 <tr>
                     <th>Course_id</th>
                     <th>CourseName</th>
-{{--                    <th>Price</th>--}}
-{{--                    <th>Teacher_name</th>--}}
-                    <th>Control</th>
+                   <th>photo</th>
+                 {{-- <th>Teacher_name</th>
+                    <th>Control</th> --}}
 
                 </tr>
                 </thead>
@@ -57,6 +57,18 @@
                         <tr>
                             <td>{{$course->id}}</td>
                             <td>{{$course->name}}</td>
+
+                          
+                            <td>
+                                @if ($course->image)
+                                <img src="{{ asset('storage') . "/$course->image" }}" width="270px" alt="Course Image">
+                                @else
+                               <p>No image</p>
+                                @endif
+                            </td>
+
+                            
+                               {{-- <td>{{$course->price}}</td> --}}
 {{--                            <td>{{$course->price}}</td>--}}
 {{--                            <td>{{$course->teacher->username}}</td>--}}
 

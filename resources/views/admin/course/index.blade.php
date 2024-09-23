@@ -59,14 +59,11 @@
                             <td>{{$course->name}}</td>
 
                           
-                            <td>
-                                @if ($course->image)
-                                <img src="{{ asset('storage') . "/$course->image" }}" width="270px" alt="Course Image">
-                                @else
-                               <p>No image</p>
-                                @endif
-                            </td>
-
+                            @if(!empty($course->image))
+                            <td><img src="{{ asset('storage')."/$course->image"}}" width = 90px height="70px"></td>
+                        @else
+                            <td></td>
+                        @endif
                             
                                {{-- <td>{{$course->price}}</td> --}}
 {{--                            <td>{{$course->price}}</td>--}}

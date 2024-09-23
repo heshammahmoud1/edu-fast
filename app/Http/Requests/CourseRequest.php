@@ -26,6 +26,19 @@ class CourseRequest extends FormRequest
             'name' => [ 'required'],
             'price' => ['required', 'numeric'],
             'teacher_id' => ['required', 'exists:teachers,id'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+
+        ];
+    }
+    public function messages(): array
+    {
+        return [ // errors messages to be sent to $errors as a replaceable for the default values
+            'name.required'=>'please enter Course Name',
+            'price.required'=>'please enter Course Price',
+            'price.numeric'=>'please enter Course Price',
+            'teacher_id.required'=>'please enter Course Teacher',
+            'teacher_id.exists'=>'please enter Course Teacher',
+            'image.required'=>'please enter Course Image',
 
         ];
     }

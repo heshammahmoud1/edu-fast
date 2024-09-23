@@ -32,19 +32,17 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         $data = $request->validated();
-    
-        if ($request->file('image')) {
+
+        if ($request->hasFile('image')) {
             $name = $request->file('image')->getClientOriginalName();
-    
-            $stor = $request->file('image')->storeAs('public/makes', $name);
-        
-            $data['image'] = str_replace('public/', '', $stor);
-        
+
+            $image = $request->file('image')->storeAs('images', $name);
+
+            $data['image'] = $image;
         }
         Courses::create($data);
         return redirect()->back()->with('msg', 'Added course');
     }
-    
     
     
     public function show($id){
